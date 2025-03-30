@@ -1,7 +1,3 @@
-Got it! Here's the full response as plain text, exactly how you'd want it in a `README.md` file, without any Markdown formatting in my response itself:
-
----
-
 # fre-conan-index
 
 This repository contains a curated collection of Conan package recipes maintained by [Free Range Engineering](https://freerangeengineering.se/). It is intended to be used as a **Local Recipes Index Repository**, for inclusion as a Git submodule or direct clone in projects that use Conan for C/C++ dependency management.
