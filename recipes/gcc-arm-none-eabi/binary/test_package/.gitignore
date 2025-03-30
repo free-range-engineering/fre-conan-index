@@ -1,0 +1,5 @@
+*
+!conanfile.py
+!hello.c
+!hello.cpp
+!.gitignore

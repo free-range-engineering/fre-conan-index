@@ -1,0 +1,7 @@
+[settings]
+arch=armv6
+build_type=Release
+compiler=gcc
+compiler.version=14.2
+os=baremetal
+

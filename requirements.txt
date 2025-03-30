@@ -1,0 +1,4 @@
+conan==2.14.0
+invoke==2.2.0 
+PyYAML==6.0.2 
+commitizen==4.4.1 
