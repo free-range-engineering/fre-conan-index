@@ -1,0 +1,10 @@
+sources:
+  "14.2.0":
+    Windows:
+      x86_64:
+        url: "https://github.com/espressif/crosstool-NG/releases/download/esp-14.2.0_20241119/xtensa-esp-elf-14.2.0_20241119-x86_64-w64-mingw32.zip"
+        sha256: "62ae704777d73c30689efff6e81178632a1ca44d1a2d60f4621eb997e040e028"
+    Linux:
+      x86_64:
+        url: "https://github.com/espressif/crosstool-NG/releases/download/esp-14.2.0_20241119/xtensa-esp-elf-14.2.0_20241119-aarch64-linux-gnu.tar.xz"
+        sha256: "ac2b311dc0003386425086bfc813bf2aeb3cdf3b117845802df6ebef5f69955f"

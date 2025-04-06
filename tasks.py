@@ -20,10 +20,12 @@ class Package:
     build_profiles: list[str] = None
 
 
-build_profiles = {"64bit": {"windows": "x64-windows", "linux": "x64-linux"}}
+build_profiles = {"64bit": {"windows": "x64_windows", "linux": "x64_linux"}}
 
 packages = [Package("gcc-arm-none-eabi", "14.2", None,
-                    ["arm6-gcc-baremetal", "libstdc++11"])]
+                    ["arm6_gcc_baremetal", "libstdc++11"]),Package("xtensa-esp-elf", "14.2.0", None,
+                    ["xtensalx7_gcc_baremetal", "libstdc++11"])]
+
 
 
 class Output:
@@ -76,8 +78,13 @@ def get_recipe_path(package):
     return None
 
 
-def conan_create(c, build_profile):
+def _conan_create(c, build_profile, filter="*"):
     for package in packages:
+        if filter != "*" and filter not in package.name:
+            output.trace(
+                f"Package '{package.name}' filterd out by '{filter}' ")
+            continue
+
         output.heading(f"Createing package '{package}'")
 
         package_build_folder = os.path.join(build_folder, package.name)
@@ -119,6 +126,9 @@ def conan_create(c, build_profile):
 
 @task()
 def clean(c):
+    """
+    Cleans the build tree
+    """
     if os.path.exists(build_folder):
         output.trace(f"Removed {build_folder}")
         shutil.rmtree(build_folder)
@@ -126,7 +136,7 @@ def clean(c):
 
 
 @task(clean)
-def create(c):
+def create(c, filter="*"):
     """
     Create Conan packages for the current system architecture and OS of the defined packages
     """
@@ -138,17 +148,18 @@ def create(c):
         if os.path.exists(os.path.join(profile_folder, profile)):
             output.heading(
                 f"Creating packages for {arch}, {os_name} using profile --profile:build='{profile}'")
-            conan_create(c, profile)
+            _conan_create(c, profile, filter)
         else:
             output.error(f"Profile {profile_path} does not exist")
     else:
         output.error(f"Unsupported build enviroment {arch}, {os_name}")
 
+
 @task()
 def release(c, dry_run=True):
     """
     Release/Bump the version using commitizen (cz).
-    
+
     Parameters:
     dry_run (bool): If True, perform a dry run without making any changes. Default is True.
     """
