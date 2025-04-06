@@ -33,3 +33,6 @@ class GCCArmNoneEabiConan(ConanFile):
 
     def package(self):
         copy(self, "*", src=self.source_folder, dst=self.package_folder)
+
+    def package_info(self):
+        self.buildenv_info.define("ARMGCC_DIR", self.package_folder)
